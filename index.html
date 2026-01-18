@@ -234,24 +234,27 @@
     /* Кнопки с флагами */
     .btn.flag-option {
       padding: 6px;
-      background: rgba(0, 0, 0, 0.2); /* Тёмная подложка */
+      background: rgba(0, 0, 0, 0.2);
       border: 2px solid rgba(255, 255, 255, 0.4);
       border-radius: 10px;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
+      transition: all 0.2s;
+    }
+    
+    .btn.flag-option:hover {
+      border-color: rgba(255, 255, 255, 0.7);
+      background: rgba(0, 0, 0, 0.3);
     }
     
     .btn.flag-option img {
       width: 100%;
       max-height: 80px;
       object-fit: contain;
-      background: white; /* Белый фон под прозрачные флаги */
+      background: white;
       border-radius: 6px;
-    }
-    .btn.flag-option:hover {
-      border-color: rgba(255, 255, 255, 0.6);
     }
     #result {
       text-align: center;
@@ -342,7 +345,7 @@
         🌍 Страна → Флаг?
       </button>
       <div style="text-align: center; margin-top: 20px; font-size: 12px; opacity: 0.7;">
-        v1.2.1
+        v1.2.2
       </div>
     </div>
 
