@@ -699,83 +699,90 @@
       }, 100);
     }
 
-    function submitAnswer(answer, correctAnswer) {
-      clearInterval(timerInterval);
-      const buttons = document.querySelectorAll('.btn');
-      buttons.forEach(btn => btn.disabled = true);
-
-      let isCorrect = false;
-      if (answer === null) {
-        document.getElementById('result').innerHTML = '⏰ Время вышло!';
-        playSound("wrong");
-      } else {
-        isCorrect = answer === correctAnswer;
-		if (isCorrect) {
-		  correctCount++;
-		  playSound("correct");
-		  document.getElementById('result').innerHTML = '✅ Верно!';
-		  
-		  // Эффект успеха на флаге
-		  const flagEl = document.getElementById('flag');
-		  flagEl.classList.add('success');
-		  setTimeout(() => {
-			flagEl.classList.remove('success');
-		  }, 800);
-          
-          buttons.forEach(btn => {
-            if (btn.textContent === correctAnswer) {
-              btn.classList.add('correct');
-            }
-          });
-		} else {
-		  playSound("wrong");
-		  
-		  // Найти правильную страну по флагу
-		  let correctCountryName = "Неизвестно";
-		  if (gameMode === 'country-to-flag') {
-			// Ищем в пуле вопросов
-			const currentQuestion = questions[currentQuestionIndex];
-			correctCountryName = currentQuestion.text;
-		  } else {
-			// В режиме флаг → страна, имя уже есть
-			correctCountryName = correctAnswer;
-		  }
-
-		  // Показываем правильный флаг
-		  document.getElementById('correct-country-name').textContent = correctCountryName;
-		  document.getElementById('correct-flag-img').src = correctAnswer; // URL флага
-		  document.getElementById('correct-flag').style.display = 'block';
-
-		  document.getElementById('result').innerHTML = `❌ Неверно`;
-
-		  // Подсветка
-		  buttons.forEach(btn => {
-			if (gameMode === 'country-to-flag') {
-			  // Сравниваем по URL флага
-			  const img = btn.querySelector('img');
-			  if (img && img.src === answer) {
-				btn.classList.add('incorrect');
-			  }
-			  if (img && img.src === correctAnswer) {
-				btn.classList.add('correct');
-			  }
-			} else {
-			  // Сравниваем по тексту
-			  if (btn.textContent === answer) btn.classList.add('incorrect');
-			  if (btn.textContent === correctAnswer) btn.classList.add('correct');
-			}
-		  });
-		}
+	function submitAnswer(answer, correctAnswer) {
+	  clearInterval(timerInterval);
+	  const buttons = document.querySelectorAll('.btn');
+	  buttons.forEach(btn => btn.disabled = true);
+	
+	  let isCorrect = false;
+	  if (answer === null) {
+	    document.getElementById('result').innerHTML = '⏰ Время вышло!';
+	    playSound("wrong");
+	  } else {
+	    isCorrect = answer === correctAnswer;
+	    if (isCorrect) {
+	      correctCount++;
+	      playSound("correct");
+	      document.getElementById('result').innerHTML = '✅ Верно!';
+	      
+	      // Эффект успеха на флаге (только в режиме флаг → страна)
+	      if (gameMode !== 'country-to-flag') {
+	        const flagEl = document.getElementById('flag');
+	        flagEl.classList.add('success');
+	        setTimeout(() => { flagEl.classList.remove('success'); }, 800);
+	      }
+	      
+	      buttons.forEach(btn => {
+	        if (gameMode === 'country-to-flag') {
+	          const img = btn.querySelector('img');
+	          if (img && img.src === correctAnswer) {
+	            btn.classList.add('correct');
+	          }
+	        } else {
+	          if (btn.textContent === correctAnswer) {
+	            btn.classList.add('correct');
+	          }
+	        }
+	      });
+	    } else {
+	      playSound("wrong");
+	      document.getElementById('result').innerHTML = '❌ Неверно';
+	
+	      // Показываем правильный флаг сверху
+	      let correctCountryName = "Неизвестно";
+	      if (gameMode === 'country-to-flag') {
+	        // В этом режиме имя страны — это текст вопроса
+	        correctCountryName = questions[currentQuestionIndex].text;
+	      } else {
+	        // В этом режиме имя страны — это сам correctAnswer
+	        correctCountryName = correctAnswer;
+	      }
+	
+	      document.getElementById('correct-country-name').textContent = correctCountryName;
+	      document.getElementById('correct-flag-img').src = correctAnswer;
+	      document.getElementById('correct-flag').style.display = 'block';
+	
+	      // Подсветка выбора и правильного ответа
+	      buttons.forEach(btn => {
+	        if (gameMode === 'country-to-flag') {
+	          const img = btn.querySelector('img');
+	          if (img && img.src === answer) {
+	            btn.classList.add('incorrect');
+	          }
+	          if (img && img.src === correctAnswer) {
+	            btn.classList.add('correct');
+	          }
+	        } else {
+	          if (btn.textContent === answer) {
+	            btn.classList.add('incorrect');
+	          }
+	          if (btn.textContent === correctAnswer) {
+	            btn.classList.add('correct');
+	          }
+	        }
+	      });
+	    }
 	  }
-      setTimeout(() => {
-        currentQuestionIndex++;
-        if (currentQuestionIndex < questions.length) {
-          loadQuestion();
-        } else {
-          endGame();
-        }
-      }, 2500);
-    }
+	
+	  setTimeout(() => {
+	    currentQuestionIndex++;
+	    if (currentQuestionIndex < questions.length) {
+	      loadQuestion();
+	    } else {
+	      endGame();
+	    }
+	  }, 2500);
+	}
 
     function endGame() {
       document.getElementById('final-correct').textContent = correctCount;
