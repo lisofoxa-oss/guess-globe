@@ -621,65 +621,66 @@
     }
 
 	function loadQuestion() {
-	  // Скрыть правильный флаг
-	  document.getElementById('correct-flag').style.display = 'none';
 	  if (currentQuestionIndex >= questions.length) {
-		endGame();
-		return;
+	    endGame();
+	    return;
 	  }
 	  
 	  const q = questions[currentQuestionIndex];
 	  document.getElementById('current').textContent = currentQuestionIndex + 1;
 	  document.getElementById('correct').textContent = correctCount;
 	  document.getElementById('result').textContent = '';
-
+	
+	  // Скрыть блок правильного флага
+	  document.getElementById('correct-flag').style.display = 'none';
+	
 	  // Скрыть всё
 	  document.getElementById('question-text').style.display = 'none';
 	  document.getElementById('flag-block').style.display = 'block';
 	  document.getElementById('options').innerHTML = '';
 	  document.getElementById('options').className = 'options-grid';
-
+	
 	  if (gameMode === 'country-to-flag') {
-		// Режим: Страна → Флаг
-		document.getElementById('question-text').textContent = q.text;
-		document.getElementById('question-text').style.display = 'block';
-		document.getElementById('flag-block').style.display = 'none'; // ← УБРАЛИ ПУСТОЙ БЛОК
-
-		const optionsDiv = document.getElementById('options');
-		optionsDiv.classList.add(currentLevel); // easy/medium/hard
-
-		q.options.forEach(opt => {
-		  const btn = document.createElement('button');
-		  btn.className = 'btn flag-option';
-		  const img = document.createElement('img');
-		  img.src = opt.image_url;
-		  img.alt = "Флаг";
-		  btn.appendChild(img);
-		  btn.onclick = () => submitAnswer(opt.image_url, q.correct_answer);
-		  optionsDiv.appendChild(btn);
-		});
+	    // Режим: Страна → Флаг
+	    document.getElementById('question-text').textContent = q.text;
+	    document.getElementById('question-text').style.display = 'block';
+	    document.getElementById('flag-block').style.display = 'none'; // Убираем пустой блок флага
+	
+	    const optionsDiv = document.getElementById('options');
+	    optionsDiv.classList.add(currentLevel); // easy/medium/hard
+	
+	    q.options.forEach(opt => {
+	      const btn = document.createElement('button');
+	      btn.className = 'btn flag-option';
+	      const img = document.createElement('img');
+	      img.src = opt.image_url;
+	      img.alt = "Флаг";
+	      btn.appendChild(img);
+	      btn.onclick = () => submitAnswer(opt.image_url, q.correct_answer);
+	      optionsDiv.appendChild(btn);
+	    });
 	  } else {
-		// Старый режим: Флаг → Страна
-		document.getElementById('loading').style.display = 'block';
-		document.getElementById('flag').style.display = 'none';
-
-		const flagImg = document.getElementById('flag');
-		flagImg.onload = () => {
-		  document.getElementById('loading').style.display = 'none';
-		  flagImg.style.display = 'block';
-		};
-		flagImg.src = q.image_url;
-
-		const optionsDiv = document.getElementById('options');
-		q.options.forEach(opt => {
-		  const btn = document.createElement('button');
-		  btn.className = 'btn';
-		  btn.textContent = opt;
-		  btn.onclick = () => submitAnswer(opt, q.correct_answer);
-		  optionsDiv.appendChild(btn);
-		});
+	    // Режим: Флаг → Страна
+	    document.getElementById('loading').style.display = 'block';
+	    document.getElementById('flag').style.display = 'none';
+	
+	    const flagImg = document.getElementById('flag');
+	    flagImg.onload = () => {
+	      document.getElementById('loading').style.display = 'none';
+	      flagImg.style.display = 'block';
+	    };
+	    flagImg.src = q.image_url;
+	
+	    const optionsDiv = document.getElementById('options');
+	    q.options.forEach(opt => {
+	      const btn = document.createElement('button');
+	      btn.className = 'btn';
+	      btn.textContent = opt;
+	      btn.onclick = () => submitAnswer(opt, q.correct_answer);
+	      optionsDiv.appendChild(btn);
+	    });
 	  }
-
+	
 	  startTimer();
 	}
 
