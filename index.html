@@ -420,13 +420,6 @@
 	  <div class="timer-bar">
 		<div id="timer-fill" class="timer-fill"></div>
 	  </div>
-	  <!-- Правильный флаг при ошибке -->
-	  <div id="correct-flag" style="text-align: center; margin: 10px 0; display: none;">
-		<div style="display: inline-block; background: rgba(255,255,255,0.2); border: 2px dashed white; border-radius: 10px; padding: 6px;">
-		  <img id="correct-flag-img" src="" style="max-height: 80px; max-width: 120px; object-fit: contain;" alt="Правильный флаг">
-		</div>
-		<div style="margin-top: 6px; font-weight: bold;">Это: <span id="correct-country-name"></span></div>
-	  </div>
 	  
 	  <!-- Контейнер для вариантов -->
 	  <div id="options" class="options-grid"></div>
@@ -715,13 +708,14 @@
 	      playSound("correct");
 	      document.getElementById('result').innerHTML = '✅ Верно!';
 	      
-	      // Эффект успеха на флаге (только в режиме флаг → страна)
+	      // Эффект успеха (только в режиме флаг → страна)
 	      if (gameMode !== 'country-to-flag') {
 	        const flagEl = document.getElementById('flag');
 	        flagEl.classList.add('success');
 	        setTimeout(() => { flagEl.classList.remove('success'); }, 800);
 	      }
 	      
+	      // Подсветка правильного ответа
 	      buttons.forEach(btn => {
 	        if (gameMode === 'country-to-flag') {
 	          const img = btn.querySelector('img');
@@ -737,22 +731,8 @@
 	    } else {
 	      playSound("wrong");
 	      document.getElementById('result').innerHTML = '❌ Неверно';
-	
-	      // Показываем правильный флаг сверху
-	      let correctCountryName = "Неизвестно";
-	      if (gameMode === 'country-to-flag') {
-	        // В этом режиме имя страны — это текст вопроса
-	        correctCountryName = questions[currentQuestionIndex].text;
-	      } else {
-	        // В этом режиме имя страны — это сам correctAnswer
-	        correctCountryName = correctAnswer;
-	      }
-	
-	      document.getElementById('correct-country-name').textContent = correctCountryName;
-	      document.getElementById('correct-flag-img').src = correctAnswer;
-	      document.getElementById('correct-flag').style.display = 'block';
-	
-	      // Подсветка выбора и правильного ответа
+	      
+	      // Подсветка: выбранный — красный, правильный — зелёный
 	      buttons.forEach(btn => {
 	        if (gameMode === 'country-to-flag') {
 	          const img = btn.querySelector('img');
@@ -783,7 +763,6 @@
 	    }
 	  }, 2500);
 	}
-
     function endGame() {
       document.getElementById('final-correct').textContent = correctCount;
       const messageEl = document.getElementById('final-message');
