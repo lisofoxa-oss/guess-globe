@@ -141,7 +141,8 @@
     cursor: pointer;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;  /* кнопки по центру */
+    text-align: center;
     transition: transform 0.08s ease, box-shadow 0.12s ease, background 0.15s ease, border-color 0.15s ease;
   }
 
@@ -428,9 +429,9 @@
 
   .theme-switcher {
     position: absolute;
-    top: 10px;
-    left: 10px;
-    z-index: 10;
+    top: 12px;
+    left: 12px;
+    z-index: 20;  /* выше всего */
   }
   
   .theme-btn {
@@ -451,7 +452,7 @@
     transform: scale(0.95);
   }
   
-  /* Темы подстраиваются под кнопку */
+  /* СПРАВА от close-btn */
   body.theme-dark .theme-btn {
     background: rgba(255, 255, 255, 0.15);
     color: #ffffff;
@@ -461,11 +462,10 @@
   
   body.theme-light .theme-btn {
     background: rgba(255, 255, 255, 0.25);
-    color: #ffffff;
+    color: #1b5e20;
     box-shadow: 0 0 12px rgba(76, 175, 80, 0.6);
     border: 1px solid rgba(255, 255, 255, 0.4);
   }
-
 
   
   /* === ТЕМА 1: ЧЁРНЫЙ НЕОН === */
@@ -687,9 +687,10 @@
   }
   
   body.theme-light .level-item.selected.easy {
-    background: rgba(76, 175, 80, 0.25);
-    border-color: #4caf50;
-    box-shadow: 0 0 14px rgba(76, 175, 80, 0.7);
+    background: rgba(0, 0, 0, 0.4) !important;  /* тёмный фон */
+    border-color: #4caf50 !important;
+    box-shadow: 0 0 16px rgba(76, 175, 80, 0.9) !important;
+    color: #ffffff !important;
   }
   
   body.theme-light .level-item.selected.medium {
@@ -836,12 +837,7 @@
 
 </head>
 <body class="theme-dark">
-  <div class="container">
-  <!-- Переключатель темы -->
-  <div class="theme-switcher" style="display: none;">
-    <button id="theme-toggle" class="theme-btn">☀️</button>
-  </div>
-      
+  <div class="container">    
   <div id="main-screen" class="screen active">
     <div class="top-bar">
       <div class="logo-mark">🌍</div>
@@ -888,19 +884,15 @@
 
     <!-- Игровой экран -->
     <div id="game-screen" class="screen">
-      <div class="progress fade-in">Вопрос <span id="current">1</span> из 10</div>
-      
-      <div class="stats fade-in">
+      <div class="progress">Вопрос <span id="current">1</span> из 10</div>
+      <div class="stats">
         <div>✅ Верно: <span id="correct">0</span></div>
       </div>
     
-      <!-- Группа анимируемых элементов вопроса -->
-      <div class="question-group">
-        <!-- Текст вопроса (для режима Страна → Флаг) -->
-        <div id="question-text" class="fade-in" style="display: none;"></div>
-        
-        <!-- Блок флага -->
-        <div id="flag-block" class="flag-container slide-up">
+      <!-- ПРОСТОЙ флаг-блок БЕЗ question-group -->
+      <div id="question-text" style="display: none; text-align: center; font-size: 22px; margin: 12px 0;"></div>
+      <div id="flag-block" style="display: block;">
+        <div class="flag-container">
           <div id="loading" class="loading">Загрузка...</div>
           <img id="flag" class="flag" alt="Флаг страны">
         </div>
@@ -909,10 +901,10 @@
       <div class="timer-bar">
         <div id="timer-fill" class="timer-fill"></div>
       </div>
-    
       <div id="options" class="options-grid"></div>
       <div id="result"></div>
     </div>
+
 
     <!-- Финальный экран -->
     <div id="final-screen" class="screen">
@@ -922,6 +914,11 @@
       <button class="restart-btn" onclick="restartGame()">Играть снова</button>
     </div>
 
+    <!-- Переключатель темы -->
+    <div class="theme-switcher" style="display: none;">
+      <button id="theme-toggle" class="theme-btn">☀️</button>
+    </div>
+    
     <button class="close-btn" onclick="window.Telegram.WebApp.close()">✕</button>
     <button class="music-toggle" id="music-toggle" onclick="toggleMusic()">♪</button>
   </div>
@@ -1087,18 +1084,7 @@
         updateBackground(currentLevel);
       }
     }
-
-    function updateBackground(level) {
-      const body = document.body;
-      if (level === "easy") {
-        body.style.background = "linear-gradient(135deg, #4CAF50, #8BC34A)";
-      } else if (level === "medium") {
-        body.style.background = "linear-gradient(135deg, #FF9800, #FFC107)";
-      } else {
-        body.style.background = "linear-gradient(135deg, #F44336, #E91E63)";
-      }
-    }
-
+    
     function loadQuestion() {
       if (currentQuestionIndex >= questions.length) {
         endGame();
@@ -1109,78 +1095,60 @@
       document.getElementById('current').textContent = currentQuestionIndex + 1;
       document.getElementById('correct').textContent = correctCount;
       document.getElementById('result').textContent = '';
-      document.getElementById('result').className = 'fade-in';
     
-      // Анимация исчезновения старого вопроса
-      const questionGroup = document.querySelector('.question-group');
+      // Простой fade для опций
       const options = document.getElementById('options');
-      
-      questionGroup.classList.add('fade-out');
-      options.classList.add('fade-out');
-      
+      options.style.opacity = '0';
+      options.style.transition = 'opacity 0.3s ease';
+    
       setTimeout(() => {
         // Скрыть всё
         document.getElementById('question-text').style.display = 'none';
         document.getElementById('flag-block').style.display = 'block';
         document.getElementById('options').innerHTML = '';
-        document.getElementById('options').className = 'options-grid';
     
         if (gameMode === 'country-to-flag') {
-          // Режим Страна → Флаг
           document.getElementById('question-text').textContent = q.text;
           document.getElementById('question-text').style.display = 'block';
           document.getElementById('flag-block').style.display = 'none';
     
           const optionsDiv = document.getElementById('options');
           optionsDiv.classList.add(currentLevel);
-    
-          q.options.forEach((opt, index) => {
+          
+          q.options.forEach(opt => {
             const btn = document.createElement('button');
-            btn.className = `btn flag-option fade-in`;
-            btn.style.animationDelay = `${index * 0.05}s`;
-            
+            btn.className = 'btn flag-option';
             const img = document.createElement('img');
             img.src = opt.image_url;
             img.alt = "Флаг";
-            img.className = 'fade-in';
-            img.style.animationDelay = `${index * 0.05 + 0.1}s`;
-            
             btn.appendChild(img);
             btn.onclick = () => submitAnswer(opt.image_url, q.correct_answer);
             optionsDiv.appendChild(btn);
           });
         } else {
-          // Режим Флаг → Страна
           document.getElementById('loading').style.display = 'block';
           document.getElementById('flag').style.display = 'none';
     
           const flagImg = document.getElementById('flag');
           flagImg.onload = () => {
             document.getElementById('loading').style.display = 'none';
-            document.getElementById('flag').style.display = 'block';
-            document.querySelector('.flag-container').classList.add('slide-up');
+            flagImg.style.display = 'block';
           };
           flagImg.src = q.image_url;
     
           const optionsDiv = document.getElementById('options');
-          q.options.forEach((opt, index) => {
+          q.options.forEach(opt => {
             const btn = document.createElement('button');
-            btn.className = `btn fade-in`;
-            btn.style.animationDelay = `${index * 0.08}s`;
-            btn.innerHTML = `<span>${opt}</span><span class="badge">выбрать</span>`;
+            btn.className = 'btn';
+            btn.textContent = opt;
             btn.onclick = () => submitAnswer(opt, q.correct_answer);
             optionsDiv.appendChild(btn);
           });
         }
     
-        // Убираем классы анимации
-        setTimeout(() => {
-          questionGroup.classList.remove('fade-out');
-          options.classList.remove('fade-out');
-        }, 200);
-    
+        options.style.opacity = '1';
         startTimer();
-      }, 200);
+      }, 150);
     }
 
     function startTimer() {
