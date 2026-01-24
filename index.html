@@ -425,318 +425,423 @@
   #options::-webkit-scrollbar-thumb {
     border-radius: 999px;
   }
+
+  .theme-switcher {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 10;
+  }
+  
+  .theme-btn {
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 999px;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.1s ease, box-shadow 0.15s ease;
+    backdrop-filter: blur(12px);
+  }
+  
+  .theme-btn:active {
+    transform: scale(0.95);
+  }
+  
+  /* Темы подстраиваются под кнопку */
+  body.theme-dark .theme-btn {
+    background: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    box-shadow: 0 0 12px rgba(156, 39, 176, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  body.theme-light .theme-btn {
+    background: rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+    box-shadow: 0 0 12px rgba(76, 175, 80, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+  }
+
+
+  
   /* === ТЕМА 1: ЧЁРНЫЙ НЕОН === */
+  
+  body.theme-dark {
+    background:
+      radial-gradient(circle at 0% 0%, rgba(76, 175, 80, 0.35), transparent 55%),
+      radial-gradient(circle at 100% 100%, rgba(156, 39, 176, 0.4), transparent 55%),
+      linear-gradient(135deg, #050816, #0b1020);
+  }
+  
+  body.theme-dark .container {
+    background: rgba(10, 14, 35, 0.82);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow:
+      0 18px 45px rgba(0, 0, 0, 0.9),
+      0 0 0 1px rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(24px) saturate(135%);
+  }
+  
+  body.theme-dark .close-btn,
+  body.theme-dark .music-toggle {
+    background: rgba(12, 20, 40, 0.9);
+    color: #f5f5ff;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+  
+  body.theme-dark .logo-mark {
+    background: radial-gradient(circle at 30% 30%, #8bc34a, #4caf50);
+    box-shadow: 0 0 16px rgba(139, 195, 74, 0.8);
+  }
+  
+  body.theme-dark .title-main {
+    color: #ffffff;
+  }
+  
+  body.theme-dark .title-sub {
+    color: #cfd8ff;
+  }
+  
+  /* Главный экран – кнопки режимов */
+  body.theme-dark .mode-btn {
+    background: radial-gradient(circle at 0 0, rgba(255,255,255,0.18), rgba(15, 23, 42, 0.95));
+    border-color: rgba(255, 255, 255, 0.16);
+    color: #f5f5ff;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.85);
+  }
+  
+  body.theme-dark .mode-btn:hover {
+    box-shadow: 0 12px 30px rgba(76, 175, 80, 0.5);
+    border-color: rgba(129, 199, 132, 0.85);
+  }
+  
+  /* Уровни */
+  body.theme-dark .level-item {
+    background: rgba(15, 23, 42, 0.92);
+    border-color: rgba(255, 255, 255, 0.12);
+    color: #f5f5ff;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.8);
+  }
+  
+  body.theme-dark .level-item.selected.easy {
+    border-color: rgba(76, 175, 80, 0.9);
+    box-shadow: 0 0 18px rgba(76, 175, 80, 0.85);
+  }
+  
+  body.theme-dark .level-item.selected.medium {
+    border-color: rgba(255, 193, 7, 0.9);
+    box-shadow: 0 0 18px rgba(255, 193, 7, 0.85);
+  }
+  
+  body.theme-dark .level-item.selected.hard {
+    border-color: rgba(244, 67, 54, 0.95);
+    box-shadow: 0 0 20px rgba(244, 67, 54, 0.9);
+  }
+  
+  body.theme-dark .start-btn {
+    background: linear-gradient(135deg, #4caf50, #81c784);
+    color: #0b1020;
+    box-shadow: 0 12px 28px rgba(76, 175, 80, 0.7);
+  }
+  
+  /* Статистика, вопрос, флаг */
+  body.theme-dark .stats {
+    background: rgba(15, 23, 42, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #c5cae9;
+  }
+  
+  body.theme-dark .flag-container {
+    background: radial-gradient(circle at 30% 0%, rgba(255,255,255,0.18), rgba(10, 14, 35, 0.98));
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    box-shadow:
+      0 12px 28px rgba(0, 0, 0, 0.9),
+      0 0 0 1px rgba(0, 0, 0, 0.5);
+  }
+  
+  body.theme-dark .flag {
+    filter: drop-shadow(0 8px 16px rgba(0,0,0,0.85));
+  }
+  
+  /* Таймер */
+  body.theme-dark .timer-bar {
+    background: rgba(255, 255, 255, 0.05);
+  }
+  
+  body.theme-dark .timer-fill {
+    background: linear-gradient(90deg, #4caf50, #ffeb3b, #f44336);
+    background-size: 200% 100%;
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
+  }
+  
+  /* Текстовые варианты */
+  body.theme-dark .btn {
+    background: radial-gradient(circle at 0 0, rgba(255,255,255,0.12), rgba(15, 23, 42, 0.98));
+    border-color: rgba(255, 255, 255, 0.12);
+    color: #f5f5ff;
+    box-shadow: 0 10px 24px rgba(0,0,0,0.9);
+  }
+  
+  body.theme-dark .btn:hover:not(:disabled) {
+    box-shadow: 0 14px 30px rgba(76, 175, 80, 0.4);
+  }
+  
+  /* Флаговые варианты */
+  body.theme-dark .btn.flag-option {
+    background: radial-gradient(circle at 0 0, rgba(255,255,255,0.16), rgba(15, 23, 42, 0.98));
+    border-color: rgba(255, 255, 255, 0.16);
+    box-shadow: 0 10px 26px rgba(0,0,0,0.9);
+  }
+  
+  body.theme-dark .btn.flag-option:hover:not(:disabled) {
+    box-shadow: 0 14px 32px rgba(139, 195, 74, 0.6);
+  }
+  
+  /* Состояния ответов */
+  body.theme-dark .btn.correct {
+    background: linear-gradient(135deg, #2e7d32, #43a047) !important;
+    border-color: rgba(129, 199, 132, 0.95) !important;
+    box-shadow: 0 0 22px rgba(129, 199, 132, 1);
+    color: #e8f5e9 !important;
+  }
+  
+  body.theme-dark .btn.incorrect {
+    background: linear-gradient(135deg, #c62828, #e53935) !important;
+    border-color: rgba(244, 67, 54, 0.98) !important;
+    box-shadow: 0 0 22px rgba(244, 67, 54, 1);
+    color: #ffebee !important;
+  }
+  
+  /* Финальный экран */
+  body.theme-dark .restart-btn {
+    background: linear-gradient(135deg, #4caf50, #81c784);
+    color: #0b1020;
+    box-shadow: 0 12px 30px rgba(76, 175, 80, 0.8);
+  }
+  
+  /* Скроллбар */
+  body.theme-dark #options::-webkit-scrollbar-thumb {
+    background: rgba(129, 199, 132, 0.8);
+  }
+  /* === ТЕМА 2: СВЕТЛАЯ КАРТОЧНАЯ (похожа на твою текущую) === */
+  
+  body.theme-light {
+    background:
+      radial-gradient(circle at 20% 20%, rgba(129, 199, 132, 0.3), transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(255, 235, 59, 0.25), transparent 50%),
+      linear-gradient(145deg, #2e7d32, #5cb85c);
+  }
+  
+  body.theme-light .container {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    box-shadow:
+      0 16px 40px rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(18px) saturate(130%);
+    color: #ffffff;
+  }
+  
+  body.theme-light .close-btn,
+  body.theme-light .music-toggle {
+    background: rgba(255, 255, 255, 0.18);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.32);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.5);
+  }
+  
+  body.theme-light .logo-mark {
+    background: radial-gradient(circle at 30% 30%, #ffffff, #c5e1a5);
+    color: #33691e;
+    box-shadow: 0 0 14px rgba(200, 230, 201, 0.9);
+  }
+  
+  body.theme-light .title-main {
+    color: #ffffff;
+  }
+  
+  body.theme-light .title-sub {
+    color: #e8f5e9;
+  }
+  
+  body.theme-light .mode-btn {
+    background: rgba(255, 255, 255, 0.96);
+    border-color: rgba(255, 255, 255, 0.9);
+    color: #1b5e20;
+    box-shadow: 0 8px 20px rgba(56, 142, 60, 0.35);
+  }
+  
+  body.theme-light .mode-btn:hover {
+    box-shadow: 0 10px 24px rgba(56, 142, 60, 0.55);
+  }
+  
+  /* Уровни */
+  body.theme-light .level-item {
+    background: rgba(0, 0, 0, 0.18);
+    border-color: rgba(255, 255, 255, 0.32);
+    color: #ffffff;
+  }
+  
+  body.theme-light .level-item.selected.easy {
+    background: rgba(76, 175, 80, 0.25);
+    border-color: #4caf50;
+    box-shadow: 0 0 14px rgba(76, 175, 80, 0.7);
+  }
+  
+  body.theme-light .level-item.selected.medium {
+    background: rgba(255, 193, 7, 0.25);
+    border-color: #ffc107;
+    box-shadow: 0 0 14px rgba(255, 193, 7, 0.7);
+  }
+  
+  body.theme-light .level-item.selected.hard {
+    background: rgba(244, 67, 54, 0.25);
+    border-color: #f44336;
+    box-shadow: 0 0 14px rgba(244, 67, 54, 0.7);
+  }
+  
+  body.theme-light .start-btn {
+    background: #4caf50;
+    color: #ffffff;
+    box-shadow: 0 10px 24px rgba(56, 142, 60, 0.6);
+  }
+  
+  /* Игровой экран */
+  body.theme-light .stats {
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    color: #e8f5e9;
+  }
+  
+  body.theme-light .flag-container {
+    background: rgba(255, 255, 255, 0.16);
+    border: 2px dashed rgba(255, 255, 255, 0.55);
+    box-shadow: 0 10px 26px rgba(0,0,0,0.55);
+  }
+  
+  body.theme-light .flag {
+    filter: drop-shadow(0 6px 12px rgba(0,0,0,0.55));
+  }
+  
+  /* Таймер */
+  body.theme-light .timer-bar {
+    background: rgba(255, 255, 255, 0.32);
+  }
+  
+  body.theme-light .timer-fill {
+    background: linear-gradient(90deg, #4caf50, #ffeb3b, #f44336);
+    background-size: 200% 100%;
+  }
+  
+  /* Кнопки ответов */
+  body.theme-light .btn {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: rgba(255, 255, 255, 0.9);
+    color: #263238;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  }
+  
+  body.theme-light .btn.flag-option {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(255, 255, 255, 0.9);
+  }
+  
+  /* Состояния */
+  body.theme-light .btn.correct {
+    background: #4caf50 !important;
+    border-color: #66bb6a !important;
+    color: #ffffff !important;
+    box-shadow: 0 0 16px rgba(102, 187, 106, 1);
+  }
+  
+  body.theme-light .btn.incorrect {
+    background: #f44336 !important;
+    border-color: #ef5350 !important;
+    color: #ffffff !important;
+    box-shadow: 0 0 16px rgba(239, 83, 80, 1);
+  }
+  
+  /* Финальный экран */
+  body.theme-light .restart-btn {
+    background: #4caf50;
+    color: #ffffff;
+    box-shadow: 0 10px 24px rgba(56, 142, 60, 0.65);
+  }
+  
+  body.theme-light #options::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.75);
+  }
 
-body.theme-dark {
-  background:
-    radial-gradient(circle at 0% 0%, rgba(76, 175, 80, 0.35), transparent 55%),
-    radial-gradient(circle at 100% 100%, rgba(156, 39, 176, 0.4), transparent 55%),
-    linear-gradient(135deg, #050816, #0b1020);
-}
+  /* Анимации появления */
+  .fade-in {
+    animation: fadeIn 0.4s ease-out;
+  }
+  
+  .slide-up {
+    animation: slideUp 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Эффект исчезновения старого вопроса */
+  .fade-out {
+    animation: fadeOut 0.2s ease-in forwards;
+  }
+  
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+  
+  /* Группировка анимируемых элементов */
+  .question-group {
+    position: relative;
+  }
+  
+  .question-group > * {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
 
-body.theme-dark .container {
-  background: rgba(10, 14, 35, 0.82);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  box-shadow:
-    0 18px 45px rgba(0, 0, 0, 0.9),
-    0 0 0 1px rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(24px) saturate(135%);
-}
-
-body.theme-dark .close-btn,
-body.theme-dark .music-toggle {
-  background: rgba(12, 20, 40, 0.9);
-  color: #f5f5ff;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-}
-
-body.theme-dark .logo-mark {
-  background: radial-gradient(circle at 30% 30%, #8bc34a, #4caf50);
-  box-shadow: 0 0 16px rgba(139, 195, 74, 0.8);
-}
-
-body.theme-dark .title-main {
-  color: #ffffff;
-}
-
-body.theme-dark .title-sub {
-  color: #cfd8ff;
-}
-
-/* Главный экран – кнопки режимов */
-body.theme-dark .mode-btn {
-  background: radial-gradient(circle at 0 0, rgba(255,255,255,0.18), rgba(15, 23, 42, 0.95));
-  border-color: rgba(255, 255, 255, 0.16);
-  color: #f5f5ff;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.85);
-}
-
-body.theme-dark .mode-btn:hover {
-  box-shadow: 0 12px 30px rgba(76, 175, 80, 0.5);
-  border-color: rgba(129, 199, 132, 0.85);
-}
-
-/* Уровни */
-body.theme-dark .level-item {
-  background: rgba(15, 23, 42, 0.92);
-  border-color: rgba(255, 255, 255, 0.12);
-  color: #f5f5ff;
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.8);
-}
-
-body.theme-dark .level-item.selected.easy {
-  border-color: rgba(76, 175, 80, 0.9);
-  box-shadow: 0 0 18px rgba(76, 175, 80, 0.85);
-}
-
-body.theme-dark .level-item.selected.medium {
-  border-color: rgba(255, 193, 7, 0.9);
-  box-shadow: 0 0 18px rgba(255, 193, 7, 0.85);
-}
-
-body.theme-dark .level-item.selected.hard {
-  border-color: rgba(244, 67, 54, 0.95);
-  box-shadow: 0 0 20px rgba(244, 67, 54, 0.9);
-}
-
-body.theme-dark .start-btn {
-  background: linear-gradient(135deg, #4caf50, #81c784);
-  color: #0b1020;
-  box-shadow: 0 12px 28px rgba(76, 175, 80, 0.7);
-}
-
-/* Статистика, вопрос, флаг */
-body.theme-dark .stats {
-  background: rgba(15, 23, 42, 0.92);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: #c5cae9;
-}
-
-body.theme-dark .flag-container {
-  background: radial-gradient(circle at 30% 0%, rgba(255,255,255,0.18), rgba(10, 14, 35, 0.98));
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  box-shadow:
-    0 12px 28px rgba(0, 0, 0, 0.9),
-    0 0 0 1px rgba(0, 0, 0, 0.5);
-}
-
-body.theme-dark .flag {
-  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.85));
-}
-
-/* Таймер */
-body.theme-dark .timer-bar {
-  background: rgba(255, 255, 255, 0.05);
-}
-
-body.theme-dark .timer-fill {
-  background: linear-gradient(90deg, #4caf50, #ffeb3b, #f44336);
-  background-size: 200% 100%;
-  box-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
-}
-
-/* Текстовые варианты */
-body.theme-dark .btn {
-  background: radial-gradient(circle at 0 0, rgba(255,255,255,0.12), rgba(15, 23, 42, 0.98));
-  border-color: rgba(255, 255, 255, 0.12);
-  color: #f5f5ff;
-  box-shadow: 0 10px 24px rgba(0,0,0,0.9);
-}
-
-body.theme-dark .btn:hover:not(:disabled) {
-  box-shadow: 0 14px 30px rgba(76, 175, 80, 0.4);
-}
-
-/* Флаговые варианты */
-body.theme-dark .btn.flag-option {
-  background: radial-gradient(circle at 0 0, rgba(255,255,255,0.16), rgba(15, 23, 42, 0.98));
-  border-color: rgba(255, 255, 255, 0.16);
-  box-shadow: 0 10px 26px rgba(0,0,0,0.9);
-}
-
-body.theme-dark .btn.flag-option:hover:not(:disabled) {
-  box-shadow: 0 14px 32px rgba(139, 195, 74, 0.6);
-}
-
-/* Состояния ответов */
-body.theme-dark .btn.correct {
-  background: linear-gradient(135deg, #2e7d32, #43a047) !important;
-  border-color: rgba(129, 199, 132, 0.95) !important;
-  box-shadow: 0 0 22px rgba(129, 199, 132, 1);
-  color: #e8f5e9 !important;
-}
-
-body.theme-dark .btn.incorrect {
-  background: linear-gradient(135deg, #c62828, #e53935) !important;
-  border-color: rgba(244, 67, 54, 0.98) !important;
-  box-shadow: 0 0 22px rgba(244, 67, 54, 1);
-  color: #ffebee !important;
-}
-
-/* Финальный экран */
-body.theme-dark .restart-btn {
-  background: linear-gradient(135deg, #4caf50, #81c784);
-  color: #0b1020;
-  box-shadow: 0 12px 30px rgba(76, 175, 80, 0.8);
-}
-
-/* Скроллбар */
-body.theme-dark #options::-webkit-scrollbar-thumb {
-  background: rgba(129, 199, 132, 0.8);
-}
-/* === ТЕМА 2: СВЕТЛАЯ КАРТОЧНАЯ (похожа на твою текущую) === */
-
-body.theme-light {
-  background:
-    radial-gradient(circle at 20% 20%, rgba(129, 199, 132, 0.3), transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(255, 235, 59, 0.25), transparent 50%),
-    linear-gradient(145deg, #2e7d32, #5cb85c);
-}
-
-body.theme-light .container {
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  box-shadow:
-    0 16px 40px rgba(0, 0, 0, 0.55);
-  backdrop-filter: blur(18px) saturate(130%);
-  color: #ffffff;
-}
-
-body.theme-light .close-btn,
-body.theme-light .music-toggle {
-  background: rgba(255, 255, 255, 0.18);
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.32);
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.5);
-}
-
-body.theme-light .logo-mark {
-  background: radial-gradient(circle at 30% 30%, #ffffff, #c5e1a5);
-  color: #33691e;
-  box-shadow: 0 0 14px rgba(200, 230, 201, 0.9);
-}
-
-body.theme-light .title-main {
-  color: #ffffff;
-}
-
-body.theme-light .title-sub {
-  color: #e8f5e9;
-}
-
-body.theme-light .mode-btn {
-  background: rgba(255, 255, 255, 0.96);
-  border-color: rgba(255, 255, 255, 0.9);
-  color: #1b5e20;
-  box-shadow: 0 8px 20px rgba(56, 142, 60, 0.35);
-}
-
-body.theme-light .mode-btn:hover {
-  box-shadow: 0 10px 24px rgba(56, 142, 60, 0.55);
-}
-
-/* Уровни */
-body.theme-light .level-item {
-  background: rgba(0, 0, 0, 0.18);
-  border-color: rgba(255, 255, 255, 0.32);
-  color: #ffffff;
-}
-
-body.theme-light .level-item.selected.easy {
-  background: rgba(76, 175, 80, 0.25);
-  border-color: #4caf50;
-  box-shadow: 0 0 14px rgba(76, 175, 80, 0.7);
-}
-
-body.theme-light .level-item.selected.medium {
-  background: rgba(255, 193, 7, 0.25);
-  border-color: #ffc107;
-  box-shadow: 0 0 14px rgba(255, 193, 7, 0.7);
-}
-
-body.theme-light .level-item.selected.hard {
-  background: rgba(244, 67, 54, 0.25);
-  border-color: #f44336;
-  box-shadow: 0 0 14px rgba(244, 67, 54, 0.7);
-}
-
-body.theme-light .start-btn {
-  background: #4caf50;
-  color: #ffffff;
-  box-shadow: 0 10px 24px rgba(56, 142, 60, 0.6);
-}
-
-/* Игровой экран */
-body.theme-light .stats {
-  background: rgba(0, 0, 0, 0.25);
-  border: 1px solid rgba(255, 255, 255, 0.28);
-  color: #e8f5e9;
-}
-
-body.theme-light .flag-container {
-  background: rgba(255, 255, 255, 0.16);
-  border: 2px dashed rgba(255, 255, 255, 0.55);
-  box-shadow: 0 10px 26px rgba(0,0,0,0.55);
-}
-
-body.theme-light .flag {
-  filter: drop-shadow(0 6px 12px rgba(0,0,0,0.55));
-}
-
-/* Таймер */
-body.theme-light .timer-bar {
-  background: rgba(255, 255, 255, 0.32);
-}
-
-body.theme-light .timer-fill {
-  background: linear-gradient(90deg, #4caf50, #ffeb3b, #f44336);
-  background-size: 200% 100%;
-}
-
-/* Кнопки ответов */
-body.theme-light .btn {
-  background: rgba(255, 255, 255, 0.95);
-  border-color: rgba(255, 255, 255, 0.9);
-  color: #263238;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
-}
-
-body.theme-light .btn.flag-option {
-  background: rgba(255, 255, 255, 0.9);
-  border-color: rgba(255, 255, 255, 0.9);
-}
-
-/* Состояния */
-body.theme-light .btn.correct {
-  background: #4caf50 !important;
-  border-color: #66bb6a !important;
-  color: #ffffff !important;
-  box-shadow: 0 0 16px rgba(102, 187, 106, 1);
-}
-
-body.theme-light .btn.incorrect {
-  background: #f44336 !important;
-  border-color: #ef5350 !important;
-  color: #ffffff !important;
-  box-shadow: 0 0 16px rgba(239, 83, 80, 1);
-}
-
-/* Финальный экран */
-body.theme-light .restart-btn {
-  background: #4caf50;
-  color: #ffffff;
-  box-shadow: 0 10px 24px rgba(56, 142, 60, 0.65);
-}
-
-body.theme-light #options::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.75);
-}
-
+  
 </style>
 
 </head>
 <body class="theme-dark">
+  <div class="container">
+  <!-- Переключатель темы -->
+  <div class="theme-switcher" style="display: none;">
+    <button id="theme-toggle" class="theme-btn">☀️</button>
+  </div>
+      
   <div id="main-screen" class="screen active">
     <div class="top-bar">
       <div class="logo-mark">🌍</div>
@@ -783,27 +888,28 @@ body.theme-light #options::-webkit-scrollbar-thumb {
 
     <!-- Игровой экран -->
     <div id="game-screen" class="screen">
-      <div class="progress">Вопрос <span id="current">1</span> из 10</div>
-      <div class="stats">
+      <div class="progress fade-in">Вопрос <span id="current">1</span> из 10</div>
+      
+      <div class="stats fade-in">
         <div>✅ Верно: <span id="correct">0</span></div>
       </div>
-
-      <!-- Текст вопроса (для режима Страна → Флаг) -->
-      <div id="question-text" style="text-align: center; font-size: 20px; margin: 12px 0; display: none;"></div>
-
-      <!-- Блок флага (только для первого режима) -->
-      <div id="flag-block" style="display: block;">
-        <div class="flag-container">
+    
+      <!-- Группа анимируемых элементов вопроса -->
+      <div class="question-group">
+        <!-- Текст вопроса (для режима Страна → Флаг) -->
+        <div id="question-text" class="fade-in" style="display: none;"></div>
+        
+        <!-- Блок флага -->
+        <div id="flag-block" class="flag-container slide-up">
           <div id="loading" class="loading">Загрузка...</div>
           <img id="flag" class="flag" alt="Флаг страны">
         </div>
       </div>
-
+    
       <div class="timer-bar">
         <div id="timer-fill" class="timer-fill"></div>
       </div>
-
-      <!-- Контейнер для вариантов -->
+    
       <div id="options" class="options-grid"></div>
       <div id="result"></div>
     </div>
@@ -1003,53 +1109,78 @@ body.theme-light #options::-webkit-scrollbar-thumb {
       document.getElementById('current').textContent = currentQuestionIndex + 1;
       document.getElementById('correct').textContent = correctCount;
       document.getElementById('result').textContent = '';
-
-      // Скрыть всё
-      document.getElementById('question-text').style.display = 'none';
-      document.getElementById('flag-block').style.display = 'block';
-      document.getElementById('options').innerHTML = '';
-      document.getElementById('options').className = 'options-grid';
-
-      if (gameMode === 'country-to-flag') {
-        document.getElementById('question-text').textContent = q.text;
-        document.getElementById('question-text').style.display = 'block';
-        document.getElementById('flag-block').style.display = 'none';
-
-        const optionsDiv = document.getElementById('options');
-        optionsDiv.classList.add(currentLevel);
-
-        q.options.forEach(opt => {
-          const btn = document.createElement('button');
-          btn.className = 'btn flag-option';
-          const img = document.createElement('img');
-          img.src = opt.image_url;
-          img.alt = "Флаг";
-          btn.appendChild(img);
-          btn.onclick = () => submitAnswer(opt.image_url, q.correct_answer);
-          optionsDiv.appendChild(btn);
-        });
-      } else {
-        document.getElementById('loading').style.display = 'block';
-        document.getElementById('flag').style.display = 'none';
-
-        const flagImg = document.getElementById('flag');
-        flagImg.onload = () => {
-          document.getElementById('loading').style.display = 'none';
-          flagImg.style.display = 'block';
-        };
-        flagImg.src = q.image_url;
-
-        const optionsDiv = document.getElementById('options');
-        q.options.forEach(opt => {
-          const btn = document.createElement('button');
-          btn.className = 'btn';
-          btn.textContent = opt;
-          btn.onclick = () => submitAnswer(opt, q.correct_answer);
-          optionsDiv.appendChild(btn);
-        });
-      }
-
-      startTimer();
+      document.getElementById('result').className = 'fade-in';
+    
+      // Анимация исчезновения старого вопроса
+      const questionGroup = document.querySelector('.question-group');
+      const options = document.getElementById('options');
+      
+      questionGroup.classList.add('fade-out');
+      options.classList.add('fade-out');
+      
+      setTimeout(() => {
+        // Скрыть всё
+        document.getElementById('question-text').style.display = 'none';
+        document.getElementById('flag-block').style.display = 'block';
+        document.getElementById('options').innerHTML = '';
+        document.getElementById('options').className = 'options-grid';
+    
+        if (gameMode === 'country-to-flag') {
+          // Режим Страна → Флаг
+          document.getElementById('question-text').textContent = q.text;
+          document.getElementById('question-text').style.display = 'block';
+          document.getElementById('flag-block').style.display = 'none';
+    
+          const optionsDiv = document.getElementById('options');
+          optionsDiv.classList.add(currentLevel);
+    
+          q.options.forEach((opt, index) => {
+            const btn = document.createElement('button');
+            btn.className = `btn flag-option fade-in`;
+            btn.style.animationDelay = `${index * 0.05}s`;
+            
+            const img = document.createElement('img');
+            img.src = opt.image_url;
+            img.alt = "Флаг";
+            img.className = 'fade-in';
+            img.style.animationDelay = `${index * 0.05 + 0.1}s`;
+            
+            btn.appendChild(img);
+            btn.onclick = () => submitAnswer(opt.image_url, q.correct_answer);
+            optionsDiv.appendChild(btn);
+          });
+        } else {
+          // Режим Флаг → Страна
+          document.getElementById('loading').style.display = 'block';
+          document.getElementById('flag').style.display = 'none';
+    
+          const flagImg = document.getElementById('flag');
+          flagImg.onload = () => {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('flag').style.display = 'block';
+            document.querySelector('.flag-container').classList.add('slide-up');
+          };
+          flagImg.src = q.image_url;
+    
+          const optionsDiv = document.getElementById('options');
+          q.options.forEach((opt, index) => {
+            const btn = document.createElement('button');
+            btn.className = `btn fade-in`;
+            btn.style.animationDelay = `${index * 0.08}s`;
+            btn.innerHTML = `<span>${opt}</span><span class="badge">выбрать</span>`;
+            btn.onclick = () => submitAnswer(opt, q.correct_answer);
+            optionsDiv.appendChild(btn);
+          });
+        }
+    
+        // Убираем классы анимации
+        setTimeout(() => {
+          questionGroup.classList.remove('fade-out');
+          options.classList.remove('fade-out');
+        }, 200);
+    
+        startTimer();
+      }, 200);
     }
 
     function startTimer() {
@@ -1071,13 +1202,16 @@ body.theme-light #options::-webkit-scrollbar-thumb {
       clearInterval(timerInterval);
       const buttons = document.querySelectorAll('.btn');
       buttons.forEach(btn => btn.disabled = true);
-
+    
       let isCorrect = false;
+      
       if (answer === null) {
         document.getElementById('result').innerHTML = '⏰ Время вышло!';
+        document.getElementById('result').className = 'fade-in';
         playSound("wrong");
       } else {
         isCorrect = answer === correctAnswer;
+        
         if (isCorrect) {
           correctCount++;
           playSound("correct");
@@ -1086,46 +1220,26 @@ body.theme-light #options::-webkit-scrollbar-thumb {
           if (gameMode !== 'country-to-flag') {
             const flagEl = document.getElementById('flag');
             flagEl.classList.add('success');
-            setTimeout(() => { flagEl.classList.remove('success'); }, 800);
+            setTimeout(() => flagEl.classList.remove('success'), 800);
           }
-          
-          buttons.forEach(btn => {
-            if (gameMode === 'country-to-flag') {
-              const img = btn.querySelector('img');
-              if (img && img.src === correctAnswer) {
-                btn.classList.add('correct');
-              }
-            } else {
-              if (btn.textContent === correctAnswer) {
-                btn.classList.add('correct');
-              }
-            }
-          });
         } else {
           playSound("wrong");
-          document.getElementById('result').innerHTML = '❌ Неверно';
-          
-          buttons.forEach(btn => {
-            if (gameMode === 'country-to-flag') {
-              const img = btn.querySelector('img');
-              if (img && img.src === answer) {
-                btn.classList.add('incorrect');
-              }
-              if (img && img.src === correctAnswer) {
-                btn.classList.add('correct');
-              }
-            } else {
-              if (btn.textContent === answer) {
-                btn.classList.add('incorrect');
-              }
-              if (btn.textContent === correctAnswer) {
-                btn.classList.add('correct');
-              }
-            }
-          });
+          document.getElementById('result').innerHTML = '❌ Неверно!';
         }
+    
+        // Подсветка кнопок
+        buttons.forEach(btn => {
+          if (gameMode === 'country-to-flag') {
+            const img = btn.querySelector('img');
+            if (img && img.src === correctAnswer) btn.classList.add('correct');
+            if (img && img.src === answer && !isCorrect) btn.classList.add('incorrect');
+          } else {
+            if (btn.textContent.includes(correctAnswer)) btn.classList.add('correct');
+            if (btn.textContent.includes(answer) && !isCorrect) btn.classList.add('incorrect');
+          }
+        });
       }
-
+    
       setTimeout(() => {
         currentQuestionIndex++;
         if (currentQuestionIndex < questions.length) {
@@ -1182,6 +1296,41 @@ body.theme-light #options::-webkit-scrollbar-thumb {
       document.addEventListener('click', enableAudio);
       document.addEventListener('touchstart', enableAudio);
     });
+// Переключатель темы
+let isDarkTheme = true; // по умолчанию тёмная
+
+document.addEventListener('DOMContentLoaded', () => {
+  const themeToggle = document.getElementById('theme-toggle');
+  const themeSwitcher = document.querySelector('.theme-switcher');
+  const container = document.querySelector('.container');
+  
+  // Показываем переключатель
+  themeSwitcher.style.display = 'block';
+  
+  themeToggle.addEventListener('click', () => {
+    isDarkTheme = !isDarkTheme;
+    
+    if (isDarkTheme) {
+      document.body.className = 'theme-dark';
+      themeToggle.textContent = '☀️';
+    } else {
+      document.body.className = 'theme-light';
+      themeToggle.textContent = '🌙';
+    }
+    
+    // Сохраняем выбор в localStorage
+    localStorage.setItem('guessGlobeTheme', isDarkTheme ? 'dark' : 'light');
+  });
+  
+  // Загружаем сохранённую тему
+  const savedTheme = localStorage.getItem('guessGlobeTheme');
+  if (savedTheme === 'light') {
+    isDarkTheme = false;
+    document.body.className = 'theme-light';
+    document.getElementById('theme-toggle').textContent = '🌙';
+  }
+});
+    
   </script>
 </body>
 </html>
