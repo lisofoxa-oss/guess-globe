@@ -88,7 +88,6 @@
     display: flex; 
   }
 
-  /* Кнопки навигации */
   .close-btn, .theme-btn, .music-toggle {
     position: absolute;
     width: 36px;
@@ -104,10 +103,12 @@
     backdrop-filter: blur(12px);
     z-index: 10;
   }
+  
+  /* ПРАВЫЙ ВЕРХНИЙ УГЛОК: ♪ ☀️ ✕ */
+  .music-toggle { top: 14px; right: 102px; }  /* самая левая */
+  .theme-btn { top: 14px; right: 54px; }      /* середина */
+  .close-btn { top: 14px; right: 14px; }      /* правая (как было) */
 
-  .close-btn { top: 14px; right: 14px; }
-  .theme-btn { top: 14px; left: 14px; }
-  .music-toggle { bottom: 14px; right: 14px; }
 
   body.theme-dark .close-btn, body.theme-dark .theme-btn, body.theme-dark .music-toggle {
     background: rgba(255, 255, 255, 0.15);
@@ -451,9 +452,9 @@
 <body class="theme-dark">
   <div class="container">
     <!-- Кнопки навигации (НЕ мешают) -->
+    <button class="music-toggle" id="music-toggle" onclick="toggleMusic()">♪</button>
     <button id="theme-toggle" class="theme-btn">☀️</button>
     <button class="close-btn" onclick="window.Telegram.WebApp.close()">✕</button>
-    <button class="music-toggle" id="music-toggle" onclick="toggleMusic()">♪</button>
   
     <!-- Главный экран -->
     <div id="main-screen" class="screen active">
@@ -471,7 +472,7 @@
         🌍 Страна → Флаг
       </button>
       <div style="text-align: center; margin-top: 20px; font-size: 12px; opacity: 0.6;">
-        v1.2.5
+        v1.2.6
       </div>
     </div>
 
