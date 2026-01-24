@@ -338,29 +338,47 @@
 
   .options-grid {
     display: grid;
-    gap: 12px;
+    gap: 10px;
     margin: 12px 0;
   }
-
-  .options-grid.easy { grid-template-columns: repeat(2, 1fr); }
-  .options-grid.medium { grid-template-columns: repeat(2, 1fr); }
-  .options-grid.medium .btn:nth-child(5) { grid-column: span 2; height: 80px; }
-  .options-grid.hard { grid-template-columns: repeat(3, 1fr); }
-
+  
+  /* ЛЁГКИЙ: 2x2 = 4 флага */
+  .options-grid.easy { 
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 80px);
+  }
+  
+  /* СРЕДНИЙ: 2x3 = 6 флагов (5-й шире) */
+  .options-grid.medium { 
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 70px);
+  }
+  .options-grid.medium .btn:nth-child(5) { 
+    grid-column: span 2; 
+    grid-row: span 1;
+    height: 70px;
+  }
+  
+  /* СЛОЖНЫЙ: 2x3 = 6 флагов */
+  .options-grid.hard { 
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 70px);
+  }
+  
   .btn.flag-option {
-    padding: 8px;
+    padding: 6px;
+    height: 70px;  /* фиксированная высота */
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 80px;
   }
-
+  
   .btn.flag-option img {
     width: 100%;
-    height: 64px;
-    max-width: 110px;
+    height: 60px;
+    max-width: 100px;
     object-fit: contain;
-    border-radius: 10px;
+    border-radius: 8px;
   }
 
   #result {
@@ -408,15 +426,35 @@
   /* Скроллбар */
   #options::-webkit-scrollbar { width: 4px; }
   #options::-webkit-scrollbar-thumb { border-radius: 2px; background: rgba(255,255,255,0.3); }
+
+  /* Кнопки не мешают на игровом экране */
+  #game-screen .theme-btn,
+  #game-screen .close-btn,
+  #level-screen .theme-btn,
+  #final-screen .theme-btn {
+    opacity: 0.3;
+  }
+  
+  #game-screen:hover .theme-btn,
+  #game-screen:hover .close-btn {
+    opacity: 0.8;
+  }
+  
+  /* Флаги ближе друг к другу */
+  .options-grid {
+    gap: 8px;  /* меньше расстояние */
+  }
 </style>
 
 
 </head>
 <body class="theme-dark">
   <div class="container">
-    <!-- Переключатель темы -->
+    <!-- Кнопки навигации (НЕ мешают) -->
     <button id="theme-toggle" class="theme-btn">☀️</button>
-
+    <button class="close-btn" onclick="window.Telegram.WebApp.close()">✕</button>
+    <button class="music-toggle" id="music-toggle" onclick="toggleMusic()">♪</button>
+  
     <!-- Главный экран -->
     <div id="main-screen" class="screen active">
       <div class="top-bar">
