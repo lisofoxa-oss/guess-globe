@@ -531,9 +531,6 @@
       <div id="final-message"></div>
       <button class="restart-btn" onclick="restartGame()">🎮 Играть снова</button>
     </div>
-
-    <button class="close-btn" onclick="window.Telegram.WebApp.close()">✕</button>
-    <button class="music-toggle" id="music-toggle" onclick="toggleMusic()">♪</button>
   </div>
 
   <!-- Конфетти -->
@@ -658,6 +655,7 @@
         const img = document.createElement('img');
         img.src = opt.image_url;
         img.alt = "Флаг";
+        img.loading = "lazy";
         btn.appendChild(img);
         btn.onclick = () => submitAnswer(opt.image_url, q.correct_answer);
         document.getElementById('options').appendChild(btn);
@@ -746,6 +744,7 @@
     
     if (correctCount === 10) {
       messageEl.innerHTML = '🎉 Идеальный результат!';
+      createConfetti();
     } else if (correctCount >= 7) {
       messageEl.innerHTML = '👍 Отлично!';
     } else if (correctCount >= 5) {
